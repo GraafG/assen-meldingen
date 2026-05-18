@@ -78,15 +78,15 @@ const title = 'Meldingen Assen — Kaart & Overzicht';
 const DATA_BASE = (document.querySelector('meta[name="site-base"]')?.content || '/').replace(/\/$/, '');
 
 const CATEGORY_COLORS = {
-  'afval': '#8B4513',
-  'wegen-verkeer-en-straatmeubilair': '#E67E22',
-  'openbaar-groen-en-water': '#27AE60',
-  'overlast-openbare-ruimte': '#8E44AD',
-  'overlast-dier': '#E74C3C',
-  'schoon': '#3498DB',
-  'civiele-constructies': '#7F8C8D',
-  'riolering': '#2C3E50',
-  'overig': '#95A5A6',
+  'afval': '#D97706',                          // amber — distinct from orange
+  'wegen-verkeer-en-straatmeubilair': '#2563EB', // blue — high contrast, distinct
+  'openbaar-groen-en-water': '#16A34A',         // green (deeper, less clash with clusters)
+  'overlast-openbare-ruimte': '#7C3AED',        // violet
+  'overlast-dier': '#DC2626',                   // red
+  'schoon': '#0891B2',                          // cyan
+  'civiele-constructies': '#78716C',            // warm stone gray
+  'riolering': '#0F766E',                       // teal — was invisible dark navy
+  'overig': '#475569',                          // slate — was too light
 };
 
 let allMeldingen = [];
@@ -141,7 +141,19 @@ function initMap() {
     attribution: '© OpenStreetMap contributors',
     maxZoom: 19,
   }).addTo(map);
-  clusterGroup = L.markerClusterGroup({ maxClusterRadius: 40 });
+  clusterGroup = L.markerClusterGroup({
+    maxClusterRadius: 40,
+    iconCreateFunction(cluster) {
+      const count = cluster.getChildCount();
+      const size = count < 10 ? 28 : count < 50 ? 34 : 40;
+      return L.divIcon({
+        html: `<div style="width:${size}px;height:${size}px;line-height:${size}px;border-radius:50%;background:#334155;color:#fff;text-align:center;font-size:0.75rem;font-weight:700;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3)">${count}</div>`,
+        className: '',
+        iconSize: [size, size],
+        iconAnchor: [size / 2, size / 2],
+      });
+    },
+  });
   map.addLayer(clusterGroup);
 }
 
@@ -228,13 +240,13 @@ function renderStats() {
   const resolvedCount = historyData.total_resolved || 0;
 
   document.getElementById('stats-bar').innerHTML = `
-    <div class="stat"><span class="stat-label">Meldingen</span><span class="stat-value" style="color:var(--primary)">${filtered.length}</span></div>
+    <div class="stat stat-primary"><span class="stat-label">Meldingen</span><span class="stat-value">${filtered.length}</span></div>
     <div class="stat"><span class="stat-label">Categorieën</span><span class="stat-value">${Object.keys(cats).length}</span></div>
-    ${resolvedCount > 0 ? `<div class="stat"><span class="stat-label">Opgelost</span><span class="stat-value" style="color:#16a34a">${resolvedCount}</span></div>` : ''}
+    ${resolvedCount > 0 ? `<div class="stat stat-success"><span class="stat-label">Opgelost</span><span class="stat-value">${resolvedCount}</span></div>` : ''}
     ${topCats.map(([slug, count]) => {
       const color = CATEGORY_COLORS[slug] || '#666';
       const name = (categoriesData[slug]?.parent || slug).replace(/-/g, ' ');
-      return `<div class="stat"><span class="stat-label">${esc(name)}</span><span class="stat-value" style="color:${color}">${count}</span></div>`;
+      return `<div class="stat"><span class="stat-label"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${color};margin-right:4px;vertical-align:middle"></span>${esc(name)}</span><span class="stat-value">${count}</span></div>`;
     }).join('')}
     ${renderTrendSparkline()}
   `;
