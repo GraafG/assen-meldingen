@@ -31,7 +31,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
           git add data/ categories.json areas.json public/icons/
           if git diff --staged --quiet; then
             echo "No changes to commit"
