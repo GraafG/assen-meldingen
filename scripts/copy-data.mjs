@@ -27,3 +27,12 @@ if (existsSync(catSrc)) {
 } else {
   console.warn('⚠️  categories.json not found — skipping');
 }
+
+const areasSrc = join(root, 'areas.json');
+const areasDest = join(root, 'public', 'areas.json');
+if (existsSync(areasSrc)) {
+  copyFileSync(areasSrc, areasDest);
+  console.log('✅ areas.json copied to public/areas.json');
+} else {
+  console.warn('⚠️  areas.json not found — skipping');
+}

@@ -9,11 +9,12 @@ const title = 'Meldingen Assen — Kaart & Overzicht';
     <p>Overzicht van meldingen in de openbare ruimte — dagelijks bijgewerkt</p>
     <div class="filter-bar" role="search">
       <select id="date-picker" title="Selecteer datum" aria-label="Selecteer datum"></select>
-      <select id="category-filter" title="Filter op categorie" aria-label="Filter op categorie">
-        <option value="">Alle categorieën</option>
+      <select id="wijk-filter" title="Filter op wijk" aria-label="Filter op wijk">
+        <option value="">Alle wijken</option>
       </select>
       <input type="text" id="search-box" placeholder="Zoek op categorie, subcategorie..." aria-label="Zoek meldingen" />
     </div>
+    <div class="cat-toggles" id="cat-toggles"></div>
   </div>
 </header>
 
@@ -26,6 +27,7 @@ const title = 'Meldingen Assen — Kaart & Overzicht';
     <button id="btn-map" class="active" onclick="showView('map')" role="tab">Kaart</button>
     <button id="btn-table" onclick="showView('table')" role="tab">Tabel</button>
     <button id="btn-split" onclick="showView('split')" role="tab">Kaart + Tabel</button>
+    <button id="btn-resolved" onclick="showView('resolved')" role="tab">Opgelost</button>
   </div>
 
   <div id="map-container"></div>
@@ -38,10 +40,30 @@ const title = 'Meldingen Assen — Kaart & Overzicht';
           <th data-col="created_at">Datum <span class="arrow"></span></th>
           <th data-col="category">Categorie <span class="arrow"></span></th>
           <th data-col="subcategory">Subcategorie <span class="arrow"></span></th>
+          <th data-col="wijk">Wijk <span class="arrow"></span></th>
           <th data-col="lat">Locatie <span class="arrow"></span></th>
         </tr>
       </thead>
       <tbody id="meldingen-body"></tbody>
+    </table>
+  </div>
+
+  <div class="resolved-wrap" style="display:none" id="resolved-wrap">
+    <div class="resolved-header">
+      <h2>✅ Opgeloste meldingen</h2>
+    </div>
+    <table id="resolved-table">
+      <thead>
+        <tr>
+          <th>Datum gemeld</th>
+          <th>Datum opgelost</th>
+          <th>Dagen open</th>
+          <th>Categorie</th>
+          <th>Subcategorie</th>
+          <th>Wijk</th>
+        </tr>
+      </thead>
+      <tbody id="resolved-body"></tbody>
     </table>
   </div>
 </section>
@@ -62,7 +84,7 @@ const CATEGORY_COLORS = {
   'overlast-openbare-ruimte': '#8E44AD',
   'overlast-dier': '#E74C3C',
   'schoon': '#3498DB',
-  'civiele-constructie': '#7F8C8D',
+  'civiele-constructies': '#7F8C8D',
   'riolering': '#2C3E50',
   'overig': '#95A5A6',
 };
@@ -75,6 +97,7 @@ let sortAsc = false;
 let map = null;
 let clusterGroup = null;
 let currentView = 'map';
+let selectedCategories = new Set();
 
 function dataPathForDate(dateStr) {
   const [year, month, day] = dateStr.split('-');
@@ -104,6 +127,8 @@ async function init() {
     initMap();
     if (dates.length) loadDate(dates[0]);
     else document.getElementById('loading').textContent = 'Geen data beschikbaar.';
+
+    renderResolved();
   } catch (e) {
     document.getElementById('loading').textContent = 'Fout bij laden.';
     console.error(e);
@@ -126,7 +151,8 @@ async function loadDate(dateStr) {
     const res = await fetch(dataPathForDate(dateStr));
     allMeldingen = await res.json();
     document.getElementById('loading').style.display = 'none';
-    populateCategoryFilter();
+    renderCatToggles();
+    populateWijkFilter();
     renderAll();
   } catch (e) {
     document.getElementById('loading').textContent = 'Fout bij laden van meldingen.';
@@ -134,14 +160,44 @@ async function loadDate(dateStr) {
   }
 }
 
-function populateCategoryFilter() {
-  const sel = document.getElementById('category-filter');
+function renderCatToggles() {
+  const container = document.getElementById('cat-toggles');
+  // Gather parent categories present in current data
+  const parentSlugs = [...new Set(allMeldingen.map(m => m.category_slug))];
+
+  let html = `<button class="cat-toggle cat-toggle-all${selectedCategories.size === 0 ? ' active' : ''}" onclick="toggleCat(null)">Alle</button>`;
+  parentSlugs.sort().forEach(slug => {
+    const count = allMeldingen.filter(m => m.category_slug === slug).length;
+    const color = CATEGORY_COLORS[slug] || '#666';
+    const label = (categoriesData[slug]?.parent || slug.replace(/-/g, ' '));
+    const active = selectedCategories.has(slug) ? ' active' : '';
+    const bg = selectedCategories.has(slug) ? `background:${color};` : '';
+    html += `<button class="cat-toggle${active}" style="${bg}" onclick="toggleCat('${slug}')">
+      <span class="cat-toggle-dot" style="background:${color}"></span>${esc(label)} (${count})
+    </button>`;
+  });
+  container.innerHTML = html;
+}
+
+function toggleCat(slug) {
+  if (slug === null) {
+    selectedCategories.clear();
+  } else {
+    if (selectedCategories.has(slug)) selectedCategories.delete(slug);
+    else selectedCategories.add(slug);
+  }
+  renderCatToggles();
+  renderAll();
+}
+
+function populateWijkFilter() {
+  const sel = document.getElementById('wijk-filter');
   const current = sel.value;
-  sel.innerHTML = '<option value="">Alle categorieën</option>';
-  const cats = [...new Set(allMeldingen.map(m => m.category))].sort();
-  cats.forEach(c => {
+  sel.innerHTML = '<option value="">Alle wijken</option>';
+  const wijken = [...new Set(allMeldingen.map(m => m.wijk).filter(Boolean))].sort();
+  wijken.forEach(w => {
     const opt = document.createElement('option');
-    opt.value = c; opt.textContent = c;
+    opt.value = w; opt.textContent = w;
     sel.appendChild(opt);
   });
   sel.value = current || '';
@@ -149,10 +205,11 @@ function populateCategoryFilter() {
 
 function getFiltered() {
   const q = document.getElementById('search-box').value.toLowerCase();
-  const cat = document.getElementById('category-filter').value;
+  const wijk = document.getElementById('wijk-filter').value;
   return allMeldingen.filter(m => {
-    if (cat && m.category !== cat) return false;
-    if (q && !(m.category + ' ' + m.subcategory).toLowerCase().includes(q)) return false;
+    if (selectedCategories.size > 0 && !selectedCategories.has(m.category_slug)) return false;
+    if (wijk && m.wijk !== wijk) return false;
+    if (q && !(m.category + ' ' + m.subcategory + ' ' + (m.wijk || '')).toLowerCase().includes(q)) return false;
     return true;
   });
 }
@@ -168,13 +225,15 @@ function renderStats() {
   const cats = {};
   filtered.forEach(m => { cats[m.category_slug] = (cats[m.category_slug] || 0) + 1; });
   const topCats = Object.entries(cats).sort((a, b) => b[1] - a[1]).slice(0, 4);
+  const resolvedCount = historyData.total_resolved || 0;
 
   document.getElementById('stats-bar').innerHTML = `
     <div class="stat"><span class="stat-label">Meldingen</span><span class="stat-value" style="color:var(--primary)">${filtered.length}</span></div>
     <div class="stat"><span class="stat-label">Categorieën</span><span class="stat-value">${Object.keys(cats).length}</span></div>
+    ${resolvedCount > 0 ? `<div class="stat"><span class="stat-label">Opgelost</span><span class="stat-value" style="color:#16a34a">${resolvedCount}</span></div>` : ''}
     ${topCats.map(([slug, count]) => {
       const color = CATEGORY_COLORS[slug] || '#666';
-      const name = slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      const name = (categoriesData[slug]?.parent || slug).replace(/-/g, ' ');
       return `<div class="stat"><span class="stat-label">${esc(name)}</span><span class="stat-value" style="color:${color}">${count}</span></div>`;
     }).join('')}
   `;
@@ -195,10 +254,12 @@ function renderTable() {
   tbody.innerHTML = filtered.map(m => {
     const color = CATEGORY_COLORS[m.category_slug] || '#666';
     const dateStr = m.created_at ? new Date(m.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '';
+    const wijkBadge = m.wijk ? `<span class="wijk-badge">${esc(m.wijk)}</span>` : '';
     return `<tr>
       <td>${esc(dateStr)}</td>
       <td><span class="cat-badge" style="background:${color}">${esc(m.category)}</span></td>
       <td>${esc(m.subcategory)}</td>
+      <td>${wijkBadge}</td>
       <td>${m.lat.toFixed(5)}, ${m.lng.toFixed(5)}</td>
     </tr>`;
   }).join('');
@@ -226,14 +287,45 @@ function renderMap() {
     });
 
     const dateStr = m.created_at ? new Date(m.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+    const catInfo = categoriesData[m.subcategory_slug] || {};
+    const handlingMsg = catInfo.handling_message ? `<p class="popup-handling">${esc(catInfo.handling_message)}</p>` : '';
+    const wijkStr = m.wijk ? `<br><span class="wijk-badge">${esc(m.wijk)}</span>` : '';
+
     const marker = L.marker([m.lat, m.lng], { icon });
     marker.bindPopup(`
       <strong>${esc(m.subcategory)}</strong><br>
-      <span class="cat-badge" style="background:${color};font-size:0.7rem">${esc(m.category)}</span><br>
+      <span class="cat-badge" style="background:${color};font-size:0.7rem">${esc(m.category)}</span>${wijkStr}<br>
       <small>${esc(dateStr)}</small>
-    `, { maxWidth: 250 });
+      ${handlingMsg}
+    `, { maxWidth: 280 });
     clusterGroup.addLayer(marker);
   });
+}
+
+function renderResolved() {
+  const tbody = document.getElementById('resolved-body');
+  const resolved = (historyData.recent_resolved || []);
+  if (!resolved.length) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#9ca3af">Nog geen opgeloste meldingen bijgehouden.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = resolved.map(r => {
+    const color = CATEGORY_COLORS[r.category_slug] || '#666';
+    const reportedDate = r.created_at ? new Date(r.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+    const resolvedDate = r.resolved_date ? new Date(r.resolved_date).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+    const days = r.days_open ?? '?';
+    const daysClass = days < 7 ? 'days-fast' : days < 30 ? 'days-medium' : 'days-slow';
+    const wijkBadge = r.wijk ? `<span class="wijk-badge">${esc(r.wijk)}</span>` : '';
+    return `<tr>
+      <td>${esc(reportedDate)}</td>
+      <td>${esc(resolvedDate)}</td>
+      <td><span class="days-open ${daysClass}">${days}d</span></td>
+      <td><span class="cat-badge" style="background:${color}">${esc(r.category || r.category_slug)}</span></td>
+      <td>${esc(r.subcategory || r.subcategory_slug)}</td>
+      <td>${wijkBadge}</td>
+    </tr>`;
+  }).join('');
 }
 
 function esc(s) {
@@ -243,16 +335,17 @@ function esc(s) {
 
 function showView(v) {
   currentView = v;
-  ['map', 'table', 'split'].forEach(id => {
+  ['map', 'table', 'split', 'resolved'].forEach(id => {
     document.getElementById('btn-' + id).classList.toggle('active', id === v);
   });
   document.body.className = 'view-' + v;
+  document.getElementById('resolved-wrap').style.display = v === 'resolved' ? '' : 'none';
   if (map) setTimeout(() => map.invalidateSize(), 100);
 }
 
 // Event listeners
 document.getElementById('search-box').addEventListener('input', () => renderAll());
-document.getElementById('category-filter').addEventListener('change', () => renderAll());
+document.getElementById('wijk-filter').addEventListener('change', () => renderAll());
 document.querySelectorAll('#meldingen-table th').forEach(th => {
   th.addEventListener('click', () => {
     const col = th.dataset.col;
