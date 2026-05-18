@@ -41,7 +41,7 @@ const title = 'Meldingen Assen — Kaart & Overzicht';
           <th data-col="category">Categorie <span class="arrow"></span></th>
           <th data-col="subcategory">Subcategorie <span class="arrow"></span></th>
           <th data-col="wijk">Wijk <span class="arrow"></span></th>
-          <th data-col="lat">Locatie <span class="arrow"></span></th>
+          <th data-col="address">Adres <span class="arrow"></span></th>
         </tr>
       </thead>
       <tbody id="meldingen-body"></tbody>
@@ -209,7 +209,7 @@ function getFiltered() {
   return allMeldingen.filter(m => {
     if (selectedCategories.size > 0 && !selectedCategories.has(m.category_slug)) return false;
     if (wijk && m.wijk !== wijk) return false;
-    if (q && !(m.category + ' ' + m.subcategory + ' ' + (m.wijk || '')).toLowerCase().includes(q)) return false;
+    if (q && !(m.category + ' ' + m.subcategory + ' ' + (m.wijk || '') + ' ' + (m.address || '')).toLowerCase().includes(q)) return false;
     return true;
   });
 }
@@ -236,7 +236,37 @@ function renderStats() {
       const name = (categoriesData[slug]?.parent || slug).replace(/-/g, ' ');
       return `<div class="stat"><span class="stat-label">${esc(name)}</span><span class="stat-value" style="color:${color}">${count}</span></div>`;
     }).join('')}
+    ${renderTrendSparkline()}
   `;
+}
+
+function renderTrendSparkline() {
+  const tc = historyData.total_counts || {};
+  const entries = Object.entries(tc).sort((a, b) => a[0].localeCompare(b[0])).slice(-30);
+  if (entries.length < 2) return '';
+
+  const values = entries.map(e => e[1]);
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = max - min || 1;
+  const W = 120, H = 36, pad = 2;
+  const pts = values.map((v, i) => {
+    const x = pad + (i / (values.length - 1)) * (W - 2 * pad);
+    const y = H - pad - ((v - min) / range) * (H - 2 * pad);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+  const last = values[values.length - 1];
+  const prev = values[values.length - 2];
+  const trend = last > prev ? '↑' : last < prev ? '↓' : '→';
+  const trendColor = last > prev ? '#ef4444' : last < prev ? '#16a34a' : '#6b7280';
+
+  return `<div class="stat stat-trend" title="Openstaande meldingen (30 dagen)">
+    <span class="stat-label">Openstaand trend</span>
+    <svg width="${W}" height="${H}" style="display:block;margin:2px 0">
+      <polyline points="${pts}" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>
+    <span class="stat-value" style="color:${trendColor};font-size:0.8rem">${trend} ${last}</span>
+  </div>`;
 }
 
 function renderTable() {
@@ -260,7 +290,7 @@ function renderTable() {
       <td><span class="cat-badge" style="background:${color}">${esc(m.category)}</span></td>
       <td>${esc(m.subcategory)}</td>
       <td>${wijkBadge}</td>
-      <td>${m.lat.toFixed(5)}, ${m.lng.toFixed(5)}</td>
+      <td>${m.address ? esc(m.address) : `${m.lat.toFixed(4)}, ${m.lng.toFixed(4)}`}</td>
     </tr>`;
   }).join('');
 
@@ -289,14 +319,17 @@ function renderMap() {
     const dateStr = m.created_at ? new Date(m.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
     const catInfo = categoriesData[m.subcategory_slug] || {};
     const handlingMsg = catInfo.handling_message ? `<p class="popup-handling">${esc(catInfo.handling_message)}</p>` : '';
-    const wijkStr = m.wijk ? `<br><span class="wijk-badge">${esc(m.wijk)}</span>` : '';
+    const depts = (catInfo.departments || []).filter(Boolean);
+    const deptsStr = depts.length ? `<p class="popup-dept"><small>Afdeling: ${esc(depts[0])}</small></p>` : '';
+    const wijkStr = m.wijk ? `<span class="wijk-badge">${esc(m.wijk)}</span>` : '';
+    const addrStr = m.address ? `<br><small>📍 ${esc(m.address)}</small>` : '';
 
     const marker = L.marker([m.lat, m.lng], { icon });
     marker.bindPopup(`
       <strong>${esc(m.subcategory)}</strong><br>
-      <span class="cat-badge" style="background:${color};font-size:0.7rem">${esc(m.category)}</span>${wijkStr}<br>
+      <span class="cat-badge" style="background:${color};font-size:0.7rem">${esc(m.category)}</span> ${wijkStr}${addrStr}<br>
       <small>${esc(dateStr)}</small>
-      ${handlingMsg}
+      ${handlingMsg}${deptsStr}
     `, { maxWidth: 280 });
     clusterGroup.addLayer(marker);
   });

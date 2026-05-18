@@ -115,6 +115,12 @@ def build_history():
         reverse=True,
     )[:50]
 
+    # Daily total open count trend (from X-Total-Count header logs)
+    total_counts = {}
+    total_counts_file = DATA_DIR / "total_counts.json"
+    if total_counts_file.exists():
+        total_counts = json.loads(total_counts_file.read_text(encoding="utf-8"))
+
     history = {
         "total_meldingen": len(all_meldingen),
         "total_resolved": len(resolved_list),
@@ -122,6 +128,7 @@ def build_history():
         "first_date": dates[0] if dates else None,
         "last_date": dates[-1] if dates else None,
         "daily_counts": daily_counts,
+        "total_counts": total_counts,
         "categories": category_summary,
         "hotspots": hotspots,
         "wijk_summary": wijk_summary,

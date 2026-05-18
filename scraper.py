@@ -4,10 +4,12 @@ Usage:
     python scraper.py                    # Fetch today's data
     python scraper.py --categories       # Refresh categories + icons
     python scraper.py --refresh-areas    # Re-fetch area boundaries
+    python scraper.py --refresh-addresses # Backfill PDOK addresses for all snapshots
 """
 
 import json
 import hashlib
+import time
 from datetime import date, datetime
 from pathlib import Path
 
@@ -19,6 +21,7 @@ API_GEOGRAPHY = (
 )
 API_CATEGORIES = "https://api.meldingen.assen.nl/signals/v1/public/terms/categories"
 API_AREAS = "https://api.meldingen.assen.nl/signals/v1/public/areas/"
+API_PDOK_REVERSE = "https://api.pdok.nl/bzk/locatieserver/search/v3_1/reverse"
 
 BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
@@ -27,6 +30,8 @@ CATEGORIES_FILE = BASE_DIR / "categories.json"
 AREAS_FILE = BASE_DIR / "areas.json"
 RESOLVED_FILE = DATA_DIR / "resolved.json"
 OPEN_IDS_FILE = DATA_DIR / "open_ids.json"
+ADDRESS_CACHE_FILE = DATA_DIR / "address_cache.json"
+TOTAL_COUNTS_FILE = DATA_DIR / "total_counts.json"
 
 HEADERS = {
     "User-Agent": "AssenMeldingenBot/1.0 (https://github.com/GraafG/assen-meldingen)"
@@ -44,7 +49,137 @@ def feature_id(feat):
 def fetch_geography():
     resp = requests.get(API_GEOGRAPHY, headers=HEADERS, timeout=30)
     resp.raise_for_status()
-    return resp.json()
+    total_count = int(resp.headers.get("X-Total-Count", 0))
+    return resp.json(), total_count
+
+
+# ---------------------------------------------------------------------------
+# Daily open count logging
+# ---------------------------------------------------------------------------
+
+def log_total_count(count, date_str=None):
+    """Record the X-Total-Count (open meldingen) header value for the day."""
+    if date_str is None:
+        date_str = date.today().isoformat()
+    counts = {}
+    if TOTAL_COUNTS_FILE.exists():
+        counts = json.loads(TOTAL_COUNTS_FILE.read_text(encoding="utf-8"))
+    counts[date_str] = count
+    TOTAL_COUNTS_FILE.write_text(json.dumps(counts, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Logged total open count: {count} for {date_str}")
+
+
+# ---------------------------------------------------------------------------
+# PDOK reverse geocoding — street address enrichment
+# ---------------------------------------------------------------------------
+
+def load_address_cache():
+    if not ADDRESS_CACHE_FILE.exists():
+        return {}
+    return json.loads(ADDRESS_CACHE_FILE.read_text(encoding="utf-8"))
+
+
+def save_address_cache(cache):
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    ADDRESS_CACHE_FILE.write_text(json.dumps(cache, ensure_ascii=False), encoding="utf-8")
+
+
+def fetch_address(lat, lng, retries=2):
+    """Reverse geocode via PDOK. Returns short street address or None."""
+    for attempt in range(retries + 1):
+        try:
+            resp = requests.get(
+                API_PDOK_REVERSE,
+                params={"lon": lng, "lat": lat, "rows": 1, "type": "adres"},
+                headers=HEADERS,
+                timeout=10,
+            )
+            resp.raise_for_status()
+            docs = resp.json().get("response", {}).get("docs", [])
+            if docs:
+                # "Akkerland 137, 9408RA Assen" → "Akkerland 137"
+                full = docs[0].get("weergavenaam", "")
+                parts = full.split(",")
+                return parts[0].strip() if parts else full
+            return None
+        except Exception:
+            if attempt < retries:
+                time.sleep(1)
+    return None
+
+
+def enrich_addresses(features):
+    """Add street address to features via PDOK, using a persistent cache."""
+    cache = load_address_cache()
+    missing = [f for f in features if f["id"] not in cache]
+
+    if missing:
+        print(f"Fetching {len(missing)} addresses via PDOK...")
+        for i, f in enumerate(missing):
+            cache[f["id"]] = fetch_address(f["lat"], f["lng"])
+            time.sleep(0.15)
+            if (i + 1) % 50 == 0:
+                save_address_cache(cache)
+                print(f"  {i + 1}/{len(missing)} done")
+        save_address_cache(cache)
+        print("Address enrichment complete")
+
+    for f in features:
+        f["address"] = cache.get(f["id"])
+    return features
+
+
+def backfill_addresses():
+    """Add missing address field to all existing snapshot files via PDOK."""
+    manifest = DATA_DIR / "index.json"
+    if not manifest.exists():
+        return
+
+    cache = load_address_cache()
+    dates = json.loads(manifest.read_text(encoding="utf-8"))
+
+    # Collect unique meldingen needing lookup
+    need_lookup = {}
+    for date_str in dates:
+        year, month, day = date_str.split("-")
+        path = DATA_DIR / year / month / f"{day}.json"
+        if not path.exists():
+            continue
+        for m in json.loads(path.read_text(encoding="utf-8")):
+            mid = m["id"]
+            if mid not in cache and mid not in need_lookup:
+                need_lookup[mid] = (m["lat"], m["lng"])
+
+    if need_lookup:
+        items = list(need_lookup.items())
+        print(f"Fetching {len(items)} addresses for backfill...")
+        for i, (mid, (lat, lng)) in enumerate(items):
+            cache[mid] = fetch_address(lat, lng)
+            time.sleep(0.15)
+            if (i + 1) % 50 == 0:
+                save_address_cache(cache)
+                print(f"  {i + 1}/{len(items)} done")
+        save_address_cache(cache)
+
+    # Update all snapshot files
+    updated_files = updated_count = 0
+    for date_str in dates:
+        year, month, day = date_str.split("-")
+        path = DATA_DIR / year / month / f"{day}.json"
+        if not path.exists():
+            continue
+        meldingen = json.loads(path.read_text(encoding="utf-8"))
+        changed = False
+        for m in meldingen:
+            if "address" not in m:
+                m["address"] = cache.get(m["id"])
+                changed = True
+                updated_count += 1
+        if changed:
+            path.write_text(json.dumps(meldingen, ensure_ascii=False), encoding="utf-8")
+            updated_files += 1
+
+    print(f"Backfilled addresses in {updated_count} meldingen across {updated_files} files")
 
 
 # ---------------------------------------------------------------------------
@@ -203,19 +338,23 @@ def save_snapshot(features, date_str=None):
     out_dir.mkdir(parents=True, exist_ok=True)
     out_file = out_dir / f"{day}.json"
 
-    existing = []
+    existing_by_id = {}
     if out_file.exists():
-        existing = json.loads(out_file.read_text(encoding="utf-8"))
-    existing_ids = {f["id"] for f in existing}
+        for f in json.loads(out_file.read_text(encoding="utf-8")):
+            existing_by_id[f["id"]] = f
 
     new_count = 0
     for feat in features:
-        if feat["id"] not in existing_ids:
-            existing.append(feat)
-            existing_ids.add(feat["id"])
+        fid = feat["id"]
+        if fid not in existing_by_id:
+            existing_by_id[fid] = feat
             new_count += 1
+        else:
+            # Merge address into existing record if newly available
+            if feat.get("address") and not existing_by_id[fid].get("address"):
+                existing_by_id[fid]["address"] = feat["address"]
 
-    existing.sort(key=lambda f: f["created_at"], reverse=True)
+    existing = sorted(existing_by_id.values(), key=lambda f: f["created_at"], reverse=True)
     out_file.write_text(json.dumps(existing, ensure_ascii=False), encoding="utf-8")
     update_manifest(date_str)
     print(f"Saved {len(existing)} meldingen to {out_file} ({new_count} new)")
@@ -260,6 +399,7 @@ def fetch_and_save_categories():
                 "parent_slug": parent_slug,
                 "description": sub.get("description", ""),
                 "handling_message": sub.get("handling_message", ""),
+                "departments": [d.get("name", "") for d in sub.get("departments", [])],
                 "icon_path": icon_path,
             }
 
@@ -300,11 +440,18 @@ def main():
         if not had_areas:
             backfill_wijk(areas)
 
-    print("Fetching meldingen from Assen API...")
-    geojson = fetch_geography()
-    features = normalize_features(geojson, areas=areas)
-    print(f"Fetched {len(features)} unique meldingen")
+    if "--refresh-addresses" in sys.argv:
+        print("Backfilling addresses for all snapshots...")
+        backfill_addresses()
 
+    print("Fetching meldingen from Assen API...")
+    geojson, total_count = fetch_geography()
+    log_total_count(total_count)
+
+    features = normalize_features(geojson, areas=areas)
+    print(f"Fetched {len(features)} unique meldingen (API total: {total_count})")
+
+    enrich_addresses(features)
     track_resolutions(features)
     save_snapshot(features)
 

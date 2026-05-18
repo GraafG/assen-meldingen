@@ -5,6 +5,14 @@
     "parent_slug": "afval",
     "description": "Meldingen die gaan over kapotte, beschadigde, vieze en nieuwe afvalbakken.",
     "handling_message": "We doen ons best om uw melding binnen 1 werkdag op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Reiniging (BRe)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/afval/afvalbak.svg"
   },
   "bladeren": {
@@ -13,6 +21,17 @@
     "parent_slug": "afval",
     "description": "Meldingen die gaan over bladoverlast, ophalen van bladeren, opvegen van bladeren",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Groen (BGr)",
+      "Buitendienst Reiniging (BRe)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/afval/bladeren.svg"
   },
   "container": {
@@ -21,6 +40,15 @@
     "parent_slug": "afval",
     "description": "Meldingen de gaan over zowel de bovengrondse als ondergrondse afvalcontainers. (dus NIET de huishoudelijke minicontainers)",
     "handling_message": "We doen ons best om uw melding binnen 1 werkdag op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Reiniging (BRe)",
+      "Handhaving en Toezicht (HT)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/afval/container.svg"
   },
   "drijfvuil": {
@@ -29,6 +57,17 @@
     "parent_slug": "afval",
     "description": "Meldingen over voorwerpen die gedumpt zijn in het oppervlaktewater, maar ook watervervuiling zoals olie, e.d.",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Infra (BIf)",
+      "Buitendienst Reiniging (BRe)",
+      "Handhaving en Toezicht (HT)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/afval/drijfvuil.svg"
   },
   "dumping": {
@@ -37,6 +76,15 @@
     "parent_slug": "afval",
     "description": "Meldingen die gaan over alle vormen van afvaldumping in de openbare ruimte, met uitzondering van dumping in het water",
     "handling_message": "We doen ons best om uw melding binnen 1 werkdag op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Reiniging (BRe)",
+      "Handhaving en Toezicht (HT)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/afval/dumping.svg"
   },
   "gevaarlijk-afval": {
@@ -45,6 +93,17 @@
     "parent_slug": "afval",
     "description": "Meldingen die gaan over gevaarlijke stoffen, zoals asbest, drugsafval, glas op het wegdek, lachgas cilinders",
     "handling_message": "We doen ons best om uw melding binnen 1 werkdag op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Infra (BIf)",
+      "Buitendienst Reiniging (BRe)",
+      "Handhaving en Toezicht (HT)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/afval/gevaarlijk-afval.svg"
   },
   "minicontainer": {
@@ -53,6 +112,15 @@
     "parent_slug": "afval",
     "description": "Meldingen die gaan over de huishoudelijke minicontainer, te vroeg / te lang bij de weg, niet geleegd",
     "handling_message": "We doen ons best om uw melding binnen 1 werkdag op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Reiniging (BRe)",
+      "Handhaving en Toezicht (HT)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/afval/minicontainer.svg"
   },
   "overig-afval": {
@@ -61,6 +129,14 @@
     "parent_slug": "afval",
     "description": "",
     "handling_message": "We doen ons best om uw melding binnen 1 werkdag op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Reiniging (BRe)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/afval/overig-afval.svg"
   },
   "veeg-en-zwerfvuil": {
@@ -69,6 +145,14 @@
     "parent_slug": "afval",
     "description": "Meldingen die gaan over zwerfvuil en veegafval in de openbare ruimte en de natuur.",
     "handling_message": "We doen ons best om uw melding binnen 1 werkdag op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Reiniging (BRe)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/afval/veeg-en-zwerfvuil.svg"
   },
   "brug": {
@@ -77,6 +161,16 @@
     "parent_slug": "civiele-constructie",
     "description": "Meldingen die gaan over storingen en defecten aan bruggen en bruggetjes",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Infra (BIf)",
+      "Buitendienst Reiniging (BRe)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/civiele-constructie/brug.svg"
   },
   "overig-civiele-constructie": {
@@ -85,6 +179,15 @@
     "parent_slug": "civiele-constructie",
     "description": "",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Infra (BIf)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Toezichthouders Infra (TIF)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/civiele-constructie/overig-civiele-constructie.svg"
   },
   "tunnel": {
@@ -93,6 +196,16 @@
     "parent_slug": "civiele-constructie",
     "description": "",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Infra (BIf)",
+      "Buitendienst Reiniging (BRe)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/civiele-constructie/tunnel.svg"
   },
   "begraafplaats": {
@@ -101,6 +214,15 @@
     "parent_slug": "openbaar-groen-en-water",
     "description": "Meldingen die gaan over graven, grafstenen en het onderhouden van de begraafplaats",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Groen (BGr)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/openbaar-groen-en-water/begraafplaats.svg"
   },
   "beplanting": {
@@ -109,6 +231,15 @@
     "parent_slug": "openbaar-groen-en-water",
     "description": "Meldingen die gaan over onderhoud en aanvragen van beplanting.",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Groen (BGr)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/openbaar-groen-en-water/beplanting.svg"
   },
   "bladkorf": {
@@ -117,6 +248,15 @@
     "parent_slug": "openbaar-groen-en-water",
     "description": "Meldingen die gaan over volle of beschadigde bladkorven",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Groen (BGr)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/openbaar-groen-en-water/bladkorf.svg"
   },
   "boom": {
@@ -125,6 +265,15 @@
     "parent_slug": "openbaar-groen-en-water",
     "description": "Meldingen die gaan over omgewaaide, scheefgewaaide, zieke bomen  afgeknapte takken, bomen die gesnoeid moeten worden.",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Groen (BGr)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/openbaar-groen-en-water/boom.svg"
   },
   "exoten": {
@@ -133,6 +282,14 @@
     "parent_slug": "openbaar-groen-en-water",
     "description": "Meldingen die gaan over woekeraars, zoals Japanse duizendknoop, Sint Jacobskruid, Bereklauw, grote waternavel",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Duurzame Leefomgeving (TDL)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/openbaar-groen-en-water/exoten.svg"
   },
   "maaien": {
@@ -141,6 +298,15 @@
     "parent_slug": "openbaar-groen-en-water",
     "description": "Meldingen die gaan over het maaien van gras, riet, sloten maaien",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Groen (BGr)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/openbaar-groen-en-water/maaien.svg"
   },
   "onkruid": {
@@ -149,6 +315,18 @@
     "parent_slug": "openbaar-groen-en-water",
     "description": "meldingen die gaan over onkruidoverlast, zowel in het groen als op verharding",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Groen (BGr)",
+      "Buitendienst Reiniging (BRe)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Duurzame Leefomgeving (TDL)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/openbaar-groen-en-water/onkruid.svg"
   },
   "overig-openbaar-groen-en-water": {
@@ -157,6 +335,15 @@
     "parent_slug": "openbaar-groen-en-water",
     "description": "",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Groen (BGr)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/openbaar-groen-en-water/overig-openbaar-groen-en-water.svg"
   },
   "sloot": {
@@ -165,6 +352,17 @@
     "parent_slug": "openbaar-groen-en-water",
     "description": "Meldingen die gaan over onderhoud van sloten",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Groen (BGr)",
+      "Buitendienst Infra (BIf)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/openbaar-groen-en-water/sloot.svg"
   },
   "snoeien": {
@@ -173,6 +371,15 @@
     "parent_slug": "openbaar-groen-en-water",
     "description": "Meldingen die gaan over het snoeien van heesters, struiken.",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Groen (BGr)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/openbaar-groen-en-water/snoeien.svg"
   },
   "overig": {
@@ -181,6 +388,10 @@
     "parent_slug": "overig",
     "description": null,
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)"
+    ],
     "icon_path": null
   },
   "dood-dier": {
@@ -189,6 +400,16 @@
     "parent_slug": "overlast-dier",
     "description": "Meldingen die gaan over dode dieren zowel op land als in het water",
     "handling_message": "We doen ons best om uw melding binnen 1 werkdag op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Infra (BIf)",
+      "Buitendienst Reiniging (BRe)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-dier/dood-dier.svg"
   },
   "eikenprocessierups": {
@@ -197,6 +418,15 @@
     "parent_slug": "overlast-dier",
     "description": "Meldingen die specifiek gaan over overlast van eikenprocessierupsen.",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Groen (BGr)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-dier/eikenprocessierups.svg"
   },
   "hond": {
@@ -205,6 +435,16 @@
     "parent_slug": "overlast-dier",
     "description": "Meldingen die gaan over loslopende honden, hondenpoepoverlast.\r\nNIET: bijtende honden.",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Groen (BGr)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Handhaving en Toezicht (HT)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-dier/hond.svg"
   },
   "kinderboerderij": {
@@ -213,6 +453,12 @@
     "parent_slug": "overlast-dier",
     "description": "",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Klant Contact Centrum (KCC)",
+      "Team Duurzaamheidscentrum (DCA)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-dier/kinderboerderij.svg"
   },
   "overig-overlast-dier": {
@@ -221,6 +467,14 @@
     "parent_slug": "overlast-dier",
     "description": "",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Reiniging (BRe)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-dier/overig-overlast-dier.svg"
   },
   "plaagdier": {
@@ -229,6 +483,15 @@
     "parent_slug": "overlast-dier",
     "description": "Meldingen die gaan over ratten, muizen, wespen, roeken",
     "handling_message": "We doen ons best om uw melding binnen 1 werkdag op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Reiniging (BRe)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Duurzame Leefomgeving (TDL)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-dier/plaagdier.svg"
   },
   "bouw": {
@@ -237,6 +500,12 @@
     "parent_slug": "overlast-openbare-ruimte",
     "description": "Meldingen die gaan over overlast van bouwactiviteiten, alsmede verbouw activiteiten, vermoeden van illegale bouw, bouwmisstanden",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Klant Contact Centrum (KCC)",
+      "Team Bouwen en Wonen (BW)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-openbare-ruimte/bouw.svg"
   },
   "fiets": {
@@ -245,6 +514,13 @@
     "parent_slug": "overlast-openbare-ruimte",
     "description": "Meldingen die gaan over fietsen die overlast veroorzaken, te lang ergens staan, vernield zijn of gedumpt.",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Handhaving en Toezicht (HT)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-openbare-ruimte/fiets.svg"
   },
   "geluid": {
@@ -253,6 +529,15 @@
     "parent_slug": "overlast-openbare-ruimte",
     "description": "Meldingen die gaan over geluidsoverlast van bouwactiviteiten, harde muziek van buren.",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Handhaving en Toezicht (HT)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Bouwen en Wonen (BW)",
+      "Team Ruimte Verkeer (TRV)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-openbare-ruimte/geluid.svg"
   },
   "graffiti": {
@@ -261,6 +546,16 @@
     "parent_slug": "overlast-openbare-ruimte",
     "description": "Meldingen die gaan over aangebrachte graffiti.",
     "handling_message": "We doen ons best om uw melding binnen 2 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Reiniging (BRe)",
+      "Handhaving en Toezicht (HT)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-openbare-ruimte/graffiti.svg"
   },
   "horeca-en-evenement": {
@@ -269,6 +564,14 @@
     "parent_slug": "overlast-openbare-ruimte",
     "description": "Meldingen die gaan over geluidsoverlast van horeca en evenementen, (incl. TT circuit), kermissen, sluitingstijden horeca.",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Handhaving en Toezicht (HT)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Bouwen en Wonen (BW)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-openbare-ruimte/horeca-en-evenement.svg"
   },
   "luchtkwaliteit": {
@@ -277,6 +580,13 @@
     "parent_slug": "overlast-openbare-ruimte",
     "description": "Meldingen die gaan over houtstookoverlast, houtkachels, bbq, afvalverbranding, rioolstank",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Handhaving en Toezicht (HT)",
+      "Klant Contact Centrum (KCC)",
+      "Team Bouwen en Wonen (BW)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-openbare-ruimte/luchtkwaliteit.svg"
   },
   "overig-overlast-openbare-ruimte": {
@@ -285,6 +595,13 @@
     "parent_slug": "overlast-openbare-ruimte",
     "description": "",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Handhaving en Toezicht (HT)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-openbare-ruimte/overig-overlast-openbare-ruimte.svg"
   },
   "parkeren": {
@@ -293,6 +610,14 @@
     "parent_slug": "overlast-openbare-ruimte",
     "description": "meldingen die gaan over overlast parkeren door fout geparkeerde auto's,",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Handhaving en Toezicht (HT)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Ruimte Verkeer (TRV)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-openbare-ruimte/parkeren.svg"
   },
   "persoon": {
@@ -301,6 +626,14 @@
     "parent_slug": "overlast-openbare-ruimte",
     "description": "Meldingen die gaan over overlast door personen zoals zwervers, junkies, daklozen, jongeren, hangjeugd",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Handhaving en Toezicht (HT)",
+      "Handhaving en Toezicht Jeugd (HTJ)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-openbare-ruimte/persoon.svg"
   },
   "reclame": {
@@ -309,6 +642,13 @@
     "parent_slug": "overlast-openbare-ruimte",
     "description": "Meldingen die gaan over overlast door reclame uitingen, uitstallingen, reclameborden, reclamevlaggen, ongewenste reclame.",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Handhaving en Toezicht (HT)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-openbare-ruimte/reclame.svg"
   },
   "scooter": {
@@ -317,6 +657,13 @@
     "parent_slug": "overlast-openbare-ruimte",
     "description": "Meldingen die gaan over achtergelaten, uitgebrande, kapotte, gesloopte scooters",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Handhaving en Toezicht (HT)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/overlast-openbare-ruimte/scooter.svg"
   },
   "mankement-put": {
@@ -325,6 +672,14 @@
     "parent_slug": "riolering",
     "description": "Meldingen die gaan over ontbrekende, kapotte, verstopte rioolputten",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Infra (BIf)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/riolering/mankement-put.svg"
   },
   "overig-riolering": {
@@ -333,6 +688,14 @@
     "parent_slug": "riolering",
     "description": "",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Infra (BIf)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/riolering/overig-riolering.svg"
   },
   "riool": {
@@ -341,6 +704,14 @@
     "parent_slug": "riolering",
     "description": "Meldingen die gaan over defecten en problemen aan het riool, rioolaansluitingen",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Infra (BIf)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/riolering/riool.svg"
   },
   "wateroverlast": {
@@ -349,6 +720,16 @@
     "parent_slug": "riolering",
     "description": "Meldingen die gaan over wateroverlast veroorzaakt omdat  hemelwater wat na zware of langdurige regen na een aantal uren nog  niet verdwenen is",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Infra (BIf)",
+      "Groenbeheer (GB)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Duurzame Leefomgeving (TDL)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/riolering/wateroverlast.svg"
   },
   "bank": {
@@ -357,6 +738,14 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "Meldingen die gaan over kapotte, beschadigde, vieze en nieuwe bankjes",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Infra (BIf)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/bank.svg"
   },
   "bewegwijzering": {
@@ -365,6 +754,18 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "Meldingen die gaan over wegwijzers, straatnaamborden, fietsroutebordjes, plaatsnaamborden",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Groen (BGr)",
+      "Buitendienst Infra (BIf)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Ruimte Verkeer (TRV)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/bewegwijzering.svg"
   },
   "bushalte": {
@@ -373,6 +774,17 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "Meldingen die gaan over kapotte, beschadigde, vieze bushokjes en ABRI's",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Infra (BIf)",
+      "Buitendienst Reiniging (BRe)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Ruimte Verkeer (TRV)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/bushalte.svg"
   },
   "gladheidsbestrijding": {
@@ -381,6 +793,14 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "Meldingen die gaan over strooien, gladde wegen en fietspaden, opvriezende weggedeeltes.",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Infra (BIf)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/gladheidsbestrijding.svg"
   },
   "kast": {
@@ -389,6 +809,14 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "Meldingen die gaan over defecte electriciteitskasten, CAI, Ziggo kasten",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Infra (BIf)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/kast.svg"
   },
   "onderhoud-straat-fietspad-en-stoep": {
@@ -397,6 +825,18 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "Meldingen die gaan over kapotte en ontbrekende stoeptegels, slecht wegdek, gaten, verzakkingen, goten",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Groen (BGr)",
+      "Buitendienst Infra (BIf)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Toezichthouders Infra (TIF)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/onderhoud-straat-fietspad-en-stoep.svg"
   },
   "onveilige-verkeerssituatie": {
@@ -405,6 +845,19 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "Meldingen die gaan over onveilige verkeersituaties door te hoge beplanting, slecht uitzicht op een kruising, obstakels die het uitzicht belemmeren",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Groen (BGr)",
+      "Buitendienst Infra (BIf)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Handhaving en Toezicht (HT)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Ruimte Verkeer (TRV)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/onveilige-verkeerssituatie.svg"
   },
   "overig-wegen-verkeer-en-straatmeubilair": {
@@ -413,6 +866,15 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Infra (BIf)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Toezichthouders Infra (TIF)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/overig-wegen-verkeer-en-straatmeubilair.svg"
   },
   "paal": {
@@ -421,6 +883,16 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "Meldingen die gaan over defecte, ontbrekende, smerige paaltjes",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Infra (BIf)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Duurzaamheidscentrum (DCA)",
+      "Team Ruimte Verkeer (TRV)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/paal.svg"
   },
   "speelvoorziening": {
@@ -429,6 +901,18 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "Meldingen die gaan over onderhoud en defecten aan glijbanen, schommels, wipwap, speeltoestellen, trapveldjes",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Infra (BIf)",
+      "Buitendienst Reiniging (BRe)",
+      "Coördinator Groen (CGr)",
+      "Groenbeheer (GB)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/speelvoorziening.svg"
   },
   "straatverlichting": {
@@ -437,6 +921,17 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Infra (BIf)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "MOON (MOO)",
+      "Team Ruimte Verkeer (TRV)",
+      "Toezichthouders Infra (TIF)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/straatverlichting.svg"
   },
   "verkeersbord": {
@@ -445,6 +940,17 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "Meldingen die gaan over ontbrekende, vernielde, slecht leesbare, onjuist geplaatste verkeersborden",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Beheer Reiniging (RE)",
+      "Buitendienst Infra (BIf)",
+      "Buitendienst Reiniging (BRe)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Ruimte Verkeer (TRV)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/verkeersbord.svg"
   },
   "verkeerslicht": {
@@ -453,6 +959,15 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "Meldingen die gaan over defecte, niet werkende of knipperende verkeerslicht installaties",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Infra (BIf)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Ruimte Verkeer (TRV)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/verkeerslicht.svg"
   },
   "wegmarkering": {
@@ -461,6 +976,15 @@
     "parent_slug": "wegen-verkeer-en-straatmeubilair",
     "description": "Meldingen die gaan over verdwenen, slecht zichtbare wegmarkeringen, haaientanden, stopstrepen, voorrangstekens op het wegdek",
     "handling_message": "We doen ons best om uw melding binnen 5 werkdagen op te pakken. Indien het langer duurt krijgt u van ons bericht.",
+    "departments": [
+      "Buitendienst Infra (BIf)",
+      "Infrabeheer (IFB)",
+      "Ingenieursbureau (IB)",
+      "Klant Contact Centrum (KCC)",
+      "Team Ruimte Verkeer (TRV)",
+      "Wijkcontactpersoon (WCp)",
+      "Wijkcoӧrdinator (WCo)"
+    ],
     "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/wegmarkering.svg"
   }
 }

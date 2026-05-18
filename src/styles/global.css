@@ -122,6 +122,8 @@ tr:hover { background: #f0f7ff; }
 /* Popup */
 .leaflet-popup-content { min-width: 200px; line-height: 1.5; }
 .popup-handling { font-size: 0.75rem; color: var(--gray-600); font-style: italic; margin-top: 0.4rem; border-top: 1px solid var(--gray-200); padding-top: 0.4rem; }
+.popup-dept { font-size: 0.7rem; color: var(--gray-600); margin: 0.2rem 0 0; }
+.stat-trend { min-width: 130px; }
 
 /* Footer */
 footer { text-align: center; padding: 1.5rem 0; font-size: 0.8rem; color: var(--gray-400); }
