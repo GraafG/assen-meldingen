@@ -1,0 +1,268 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const title = 'Meldingen Assen — Kaart & Overzicht';
+---
+<BaseLayout title={title}>
+<header>
+  <div class="container">
+    <h1>🏘️ Meldingen Assen</h1>
+    <p>Overzicht van meldingen in de openbare ruimte — dagelijks bijgewerkt</p>
+    <div class="filter-bar" role="search">
+      <select id="date-picker" title="Selecteer datum" aria-label="Selecteer datum"></select>
+      <select id="category-filter" title="Filter op categorie" aria-label="Filter op categorie">
+        <option value="">Alle categorieën</option>
+      </select>
+      <input type="text" id="search-box" placeholder="Zoek op categorie, subcategorie..." aria-label="Zoek meldingen" />
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="stats-bar" id="stats-bar"></div>
+</main>
+
+<section class="container">
+  <div class="view-toggle" role="tablist">
+    <button id="btn-map" class="active" onclick="showView('map')" role="tab">Kaart</button>
+    <button id="btn-table" onclick="showView('table')" role="tab">Tabel</button>
+    <button id="btn-split" onclick="showView('split')" role="tab">Kaart + Tabel</button>
+  </div>
+
+  <div id="map-container"></div>
+
+  <div class="table-wrap">
+    <div class="loading" id="loading">Meldingen laden...</div>
+    <table id="meldingen-table" style="display:none">
+      <thead>
+        <tr>
+          <th data-col="created_at">Datum <span class="arrow"></span></th>
+          <th data-col="category">Categorie <span class="arrow"></span></th>
+          <th data-col="subcategory">Subcategorie <span class="arrow"></span></th>
+          <th data-col="lat">Locatie <span class="arrow"></span></th>
+        </tr>
+      </thead>
+      <tbody id="meldingen-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Data: <a href="https://meldingen.assen.nl" target="_blank" rel="noopener">meldingen.assen.nl</a> (publieke API). Dagelijks automatisch bijgewerkt.</p>
+  </div>
+</footer>
+
+<script is:inline>
+const DATA_BASE = (document.querySelector('meta[name="site-base"]')?.content || '/').replace(/\/$/, '');
+
+const CATEGORY_COLORS = {
+  'afval': '#8B4513',
+  'wegen-verkeer-en-straatmeubilair': '#E67E22',
+  'openbaar-groen-en-water': '#27AE60',
+  'overlast-openbare-ruimte': '#8E44AD',
+  'overlast-dier': '#E74C3C',
+  'schoon': '#3498DB',
+  'civiele-constructie': '#7F8C8D',
+  'riolering': '#2C3E50',
+  'overig': '#95A5A6',
+};
+
+let allMeldingen = [];
+let historyData = {};
+let categoriesData = {};
+let sortCol = 'created_at';
+let sortAsc = false;
+let map = null;
+let clusterGroup = null;
+let currentView = 'map';
+
+function dataPathForDate(dateStr) {
+  const [year, month, day] = dateStr.split('-');
+  return `${DATA_BASE}/data/${year}/${month}/${day}.json`;
+}
+
+async function init() {
+  try {
+    const [indexRes, histRes, catRes] = await Promise.all([
+      fetch(DATA_BASE + '/data/index.json'),
+      fetch(DATA_BASE + '/data/history.json').catch(() => null),
+      fetch(DATA_BASE + '/categories.json').catch(() => null),
+    ]);
+    const dates = await indexRes.json();
+    if (histRes && histRes.ok) historyData = await histRes.json();
+    if (catRes && catRes.ok) categoriesData = await catRes.json();
+
+    const picker = document.getElementById('date-picker');
+    dates.forEach((d, i) => {
+      const opt = document.createElement('option');
+      opt.value = d; opt.textContent = d;
+      if (i === 0) opt.selected = true;
+      picker.appendChild(opt);
+    });
+    picker.addEventListener('change', () => loadDate(picker.value));
+
+    initMap();
+    if (dates.length) loadDate(dates[0]);
+    else document.getElementById('loading').textContent = 'Geen data beschikbaar.';
+  } catch (e) {
+    document.getElementById('loading').textContent = 'Fout bij laden.';
+    console.error(e);
+  }
+}
+
+function initMap() {
+  map = L.map('map-container').setView([52.9966688, 6.5626475], 14);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 19,
+  }).addTo(map);
+  clusterGroup = L.markerClusterGroup({ maxClusterRadius: 40 });
+  map.addLayer(clusterGroup);
+}
+
+async function loadDate(dateStr) {
+  document.getElementById('loading').style.display = 'block';
+  try {
+    const res = await fetch(dataPathForDate(dateStr));
+    allMeldingen = await res.json();
+    document.getElementById('loading').style.display = 'none';
+    populateCategoryFilter();
+    renderAll();
+  } catch (e) {
+    document.getElementById('loading').textContent = 'Fout bij laden van meldingen.';
+    console.error(e);
+  }
+}
+
+function populateCategoryFilter() {
+  const sel = document.getElementById('category-filter');
+  const current = sel.value;
+  sel.innerHTML = '<option value="">Alle categorieën</option>';
+  const cats = [...new Set(allMeldingen.map(m => m.category))].sort();
+  cats.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    sel.appendChild(opt);
+  });
+  sel.value = current || '';
+}
+
+function getFiltered() {
+  const q = document.getElementById('search-box').value.toLowerCase();
+  const cat = document.getElementById('category-filter').value;
+  return allMeldingen.filter(m => {
+    if (cat && m.category !== cat) return false;
+    if (q && !(m.category + ' ' + m.subcategory).toLowerCase().includes(q)) return false;
+    return true;
+  });
+}
+
+function renderAll() {
+  renderStats();
+  renderTable();
+  renderMap();
+}
+
+function renderStats() {
+  const filtered = getFiltered();
+  const cats = {};
+  filtered.forEach(m => { cats[m.category_slug] = (cats[m.category_slug] || 0) + 1; });
+  const topCats = Object.entries(cats).sort((a, b) => b[1] - a[1]).slice(0, 4);
+
+  document.getElementById('stats-bar').innerHTML = `
+    <div class="stat"><span class="stat-label">Meldingen</span><span class="stat-value" style="color:var(--primary)">${filtered.length}</span></div>
+    <div class="stat"><span class="stat-label">Categorieën</span><span class="stat-value">${Object.keys(cats).length}</span></div>
+    ${topCats.map(([slug, count]) => {
+      const color = CATEGORY_COLORS[slug] || '#666';
+      const name = slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      return `<div class="stat"><span class="stat-label">${esc(name)}</span><span class="stat-value" style="color:${color}">${count}</span></div>`;
+    }).join('')}
+  `;
+}
+
+function renderTable() {
+  const filtered = getFiltered();
+  filtered.sort((a, b) => {
+    let va = a[sortCol] || '', vb = b[sortCol] || '';
+    if (typeof va === 'string') va = va.toLowerCase();
+    if (typeof vb === 'string') vb = vb.toLowerCase();
+    if (va < vb) return sortAsc ? -1 : 1;
+    if (va > vb) return sortAsc ? 1 : -1;
+    return 0;
+  });
+
+  const tbody = document.getElementById('meldingen-body');
+  tbody.innerHTML = filtered.map(m => {
+    const color = CATEGORY_COLORS[m.category_slug] || '#666';
+    const dateStr = m.created_at ? new Date(m.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '';
+    return `<tr>
+      <td>${esc(dateStr)}</td>
+      <td><span class="cat-badge" style="background:${color}">${esc(m.category)}</span></td>
+      <td>${esc(m.subcategory)}</td>
+      <td>${m.lat.toFixed(5)}, ${m.lng.toFixed(5)}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('meldingen-table').style.display = filtered.length ? '' : 'none';
+
+  document.querySelectorAll('#meldingen-table th .arrow').forEach(arrow => {
+    const th = arrow.parentElement;
+    arrow.textContent = th.dataset.col === sortCol ? (sortAsc ? '▲' : '▼') : '';
+  });
+}
+
+function renderMap() {
+  if (!map || !clusterGroup) return;
+  clusterGroup.clearLayers();
+  const filtered = getFiltered();
+
+  filtered.forEach(m => {
+    const color = CATEGORY_COLORS[m.category_slug] || '#666';
+    const icon = L.divIcon({
+      className: 'melding-marker',
+      html: `<div style="background:${color};width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,0.3)"></div>`,
+      iconSize: [12, 12],
+      iconAnchor: [6, 6],
+    });
+
+    const dateStr = m.created_at ? new Date(m.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+    const marker = L.marker([m.lat, m.lng], { icon });
+    marker.bindPopup(`
+      <strong>${esc(m.subcategory)}</strong><br>
+      <span class="cat-badge" style="background:${color};font-size:0.7rem">${esc(m.category)}</span><br>
+      <small>${esc(dateStr)}</small>
+    `, { maxWidth: 250 });
+    clusterGroup.addLayer(marker);
+  });
+}
+
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function showView(v) {
+  currentView = v;
+  ['map', 'table', 'split'].forEach(id => {
+    document.getElementById('btn-' + id).classList.toggle('active', id === v);
+  });
+  document.body.className = 'view-' + v;
+  if (map) setTimeout(() => map.invalidateSize(), 100);
+}
+
+// Event listeners
+document.getElementById('search-box').addEventListener('input', () => renderAll());
+document.getElementById('category-filter').addEventListener('change', () => renderAll());
+document.querySelectorAll('#meldingen-table th').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.col;
+    if (sortCol === col) sortAsc = !sortAsc;
+    else { sortCol = col; sortAsc = true; }
+    renderTable();
+  });
+});
+
+showView('map');
+init();
+</script>
+</BaseLayout>

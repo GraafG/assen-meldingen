@@ -1,0 +1,28 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'Dagelijks overzicht van meldingen in de openbare ruimte van Assen — kaart, tabel en trends.' } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <meta name="site-base" content={base} />
+  <title>{title}</title>
+  <link rel="icon" href="https://www.assen.nl/images/favicon94dbd6cfe0d8318c.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href={`${base}/styles/global.css`} />
+</head>
+<body>
+  <slot />
+  <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script is:inline src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+</body>
+</html>

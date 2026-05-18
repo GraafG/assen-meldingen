@@ -1,0 +1,90 @@
+:root {
+  --primary: #00205C;
+  --accent: #34A6A5;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-400: #9ca3af;
+  --gray-600: #4b5563;
+  --gray-800: #1f2937;
+  --red-600: #dc2626;
+  --green-600: #16a34a;
+  --white: #fff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-family: system-ui, -apple-system, sans-serif; color: var(--gray-800); background: var(--gray-100); }
+body { min-height: 100vh; }
+
+.container { max-width: 1400px; margin: 0 auto; padding: 0 1rem; }
+
+/* Header */
+header { background: var(--primary); color: var(--white); padding: 1rem 0; }
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header p { font-size: 0.85rem; opacity: 0.8; margin-top: 0.25rem; }
+
+/* Filter bar */
+.filter-bar {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+  margin-top: 0.75rem;
+}
+.filter-bar select, .filter-bar input[type="text"] {
+  padding: 0.4rem 0.6rem; border: 1px solid var(--gray-200); border-radius: 6px;
+  font-size: 0.85rem; background: var(--white); color: var(--gray-800);
+}
+.filter-bar input[type="text"] { flex: 1; min-width: 180px; }
+
+/* Stats bar */
+.stats-bar {
+  display: flex; flex-wrap: wrap; gap: 1rem; padding: 1rem 0;
+  justify-content: center; text-align: center;
+}
+.stat { min-width: 100px; }
+.stat-value { display: block; font-size: 1.3rem; font-weight: 700; color: var(--primary); }
+.stat-label { font-size: 0.75rem; color: var(--gray-600); text-transform: uppercase; }
+
+/* View toggle */
+.view-toggle { display: flex; gap: 0.5rem; margin: 0.75rem 0; }
+.view-toggle button {
+  padding: 0.4rem 1rem; border: 1px solid var(--gray-200); border-radius: 6px;
+  background: var(--white); cursor: pointer; font-size: 0.85rem;
+}
+.view-toggle button.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
+/* Map */
+#map-container { height: 500px; border-radius: 8px; overflow: hidden; margin-bottom: 1rem; }
+body.view-table #map-container { display: none; }
+body.view-map .table-wrap { display: none; }
+
+/* Table */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+th, td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid var(--gray-200); }
+th { background: var(--gray-100); font-weight: 600; cursor: pointer; user-select: none; white-space: nowrap; }
+tr:hover { background: #f0f7ff; }
+
+/* Category badge */
+.cat-badge {
+  display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px;
+  font-size: 0.75rem; font-weight: 600; color: var(--white);
+}
+.cat-afval { background: #8B4513; }
+.cat-wegen-verkeer-en-straatmeubilair { background: #E67E22; }
+.cat-openbaar-groen-en-water { background: #27AE60; }
+.cat-overlast-openbare-ruimte { background: #8E44AD; }
+.cat-overlast-dier { background: #E74C3C; }
+.cat-schoon { background: #3498DB; }
+.cat-civiele-constructies { background: #7F8C8D; }
+.cat-overig { background: #95A5A6; }
+
+/* Footer */
+footer { text-align: center; padding: 1.5rem 0; font-size: 0.8rem; color: var(--gray-400); }
+
+/* Loading */
+.loading { text-align: center; padding: 2rem; color: var(--gray-400); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  #map-container { height: 350px; }
+  .stats-bar { gap: 0.5rem; }
+  .stat { min-width: 80px; }
+}

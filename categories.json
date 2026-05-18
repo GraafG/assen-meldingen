@@ -1,0 +1,408 @@
+{
+  "afvalbak": {
+    "name": "Afvalbak",
+    "parent": "Afval",
+    "parent_slug": "afval",
+    "description": "Meldingen die gaan over kapotte, beschadigde, vieze en nieuwe afvalbakken.",
+    "icon_path": "/icons/afval/afvalbak.svg"
+  },
+  "bladeren": {
+    "name": "Bladeren",
+    "parent": "Afval",
+    "parent_slug": "afval",
+    "description": "Meldingen die gaan over bladoverlast, ophalen van bladeren, opvegen van bladeren",
+    "icon_path": "/icons/afval/bladeren.svg"
+  },
+  "container": {
+    "name": "Container",
+    "parent": "Afval",
+    "parent_slug": "afval",
+    "description": "Meldingen de gaan over zowel de bovengrondse als ondergrondse afvalcontainers. (dus NIET de huishoudelijke minicontainers)",
+    "icon_path": "/icons/afval/container.svg"
+  },
+  "drijfvuil": {
+    "name": "Drijfvuil",
+    "parent": "Afval",
+    "parent_slug": "afval",
+    "description": "Meldingen over voorwerpen die gedumpt zijn in het oppervlaktewater, maar ook watervervuiling zoals olie, e.d.",
+    "icon_path": "/icons/afval/drijfvuil.svg"
+  },
+  "dumping": {
+    "name": "Dumping",
+    "parent": "Afval",
+    "parent_slug": "afval",
+    "description": "Meldingen die gaan over alle vormen van afvaldumping in de openbare ruimte, met uitzondering van dumping in het water",
+    "icon_path": "/icons/afval/dumping.svg"
+  },
+  "gevaarlijk-afval": {
+    "name": "Gevaarlijk afval",
+    "parent": "Afval",
+    "parent_slug": "afval",
+    "description": "Meldingen die gaan over gevaarlijke stoffen, zoals asbest, drugsafval, glas op het wegdek, lachgas cilinders",
+    "icon_path": "/icons/afval/gevaarlijk-afval.svg"
+  },
+  "minicontainer": {
+    "name": "Minicontainer",
+    "parent": "Afval",
+    "parent_slug": "afval",
+    "description": "Meldingen die gaan over de huishoudelijke minicontainer, te vroeg / te lang bij de weg, niet geleegd",
+    "icon_path": "/icons/afval/minicontainer.svg"
+  },
+  "overig-afval": {
+    "name": "Overig Afval",
+    "parent": "Afval",
+    "parent_slug": "afval",
+    "description": "",
+    "icon_path": "/icons/afval/overig-afval.svg"
+  },
+  "veeg-en-zwerfvuil": {
+    "name": "Veeg en zwerfvuil",
+    "parent": "Afval",
+    "parent_slug": "afval",
+    "description": "Meldingen die gaan over zwerfvuil en veegafval in de openbare ruimte en de natuur.",
+    "icon_path": "/icons/afval/veeg-en-zwerfvuil.svg"
+  },
+  "brug": {
+    "name": "Brug",
+    "parent": "Civiele Constructie",
+    "parent_slug": "civiele-constructie",
+    "description": "Meldingen die gaan over storingen en defecten aan bruggen en bruggetjes",
+    "icon_path": "/icons/civiele-constructie/brug.svg"
+  },
+  "overig-civiele-constructie": {
+    "name": "Overig Civiele Constructie",
+    "parent": "Civiele Constructie",
+    "parent_slug": "civiele-constructie",
+    "description": "",
+    "icon_path": "/icons/civiele-constructie/overig-civiele-constructie.svg"
+  },
+  "tunnel": {
+    "name": "Tunnel",
+    "parent": "Civiele Constructie",
+    "parent_slug": "civiele-constructie",
+    "description": "",
+    "icon_path": "/icons/civiele-constructie/tunnel.svg"
+  },
+  "begraafplaats": {
+    "name": "Begraafplaats",
+    "parent": "Openbaar groen en water",
+    "parent_slug": "openbaar-groen-en-water",
+    "description": "Meldingen die gaan over graven, grafstenen en het onderhouden van de begraafplaats",
+    "icon_path": "/icons/openbaar-groen-en-water/begraafplaats.svg"
+  },
+  "beplanting": {
+    "name": "Beplanting",
+    "parent": "Openbaar groen en water",
+    "parent_slug": "openbaar-groen-en-water",
+    "description": "Meldingen die gaan over onderhoud en aanvragen van beplanting.",
+    "icon_path": "/icons/openbaar-groen-en-water/beplanting.svg"
+  },
+  "bladkorf": {
+    "name": "Bladkorf",
+    "parent": "Openbaar groen en water",
+    "parent_slug": "openbaar-groen-en-water",
+    "description": "Meldingen die gaan over volle of beschadigde bladkorven",
+    "icon_path": "/icons/openbaar-groen-en-water/bladkorf.svg"
+  },
+  "boom": {
+    "name": "Boom",
+    "parent": "Openbaar groen en water",
+    "parent_slug": "openbaar-groen-en-water",
+    "description": "Meldingen die gaan over omgewaaide, scheefgewaaide, zieke bomen  afgeknapte takken, bomen die gesnoeid moeten worden.",
+    "icon_path": "/icons/openbaar-groen-en-water/boom.svg"
+  },
+  "exoten": {
+    "name": "Exoten",
+    "parent": "Openbaar groen en water",
+    "parent_slug": "openbaar-groen-en-water",
+    "description": "Meldingen die gaan over woekeraars, zoals Japanse duizendknoop, Sint Jacobskruid, Bereklauw, grote waternavel",
+    "icon_path": "/icons/openbaar-groen-en-water/exoten.svg"
+  },
+  "maaien": {
+    "name": "Maaien",
+    "parent": "Openbaar groen en water",
+    "parent_slug": "openbaar-groen-en-water",
+    "description": "Meldingen die gaan over het maaien van gras, riet, sloten maaien",
+    "icon_path": "/icons/openbaar-groen-en-water/maaien.svg"
+  },
+  "onkruid": {
+    "name": "Onkruid",
+    "parent": "Openbaar groen en water",
+    "parent_slug": "openbaar-groen-en-water",
+    "description": "meldingen die gaan over onkruidoverlast, zowel in het groen als op verharding",
+    "icon_path": "/icons/openbaar-groen-en-water/onkruid.svg"
+  },
+  "overig-openbaar-groen-en-water": {
+    "name": "Overig Openbaar groen en water",
+    "parent": "Openbaar groen en water",
+    "parent_slug": "openbaar-groen-en-water",
+    "description": "",
+    "icon_path": "/icons/openbaar-groen-en-water/overig-openbaar-groen-en-water.svg"
+  },
+  "sloot": {
+    "name": "Sloot",
+    "parent": "Openbaar groen en water",
+    "parent_slug": "openbaar-groen-en-water",
+    "description": "Meldingen die gaan over onderhoud van sloten",
+    "icon_path": "/icons/openbaar-groen-en-water/sloot.svg"
+  },
+  "snoeien": {
+    "name": "Snoeien",
+    "parent": "Openbaar groen en water",
+    "parent_slug": "openbaar-groen-en-water",
+    "description": "Meldingen die gaan over het snoeien van heesters, struiken.",
+    "icon_path": "/icons/openbaar-groen-en-water/snoeien.svg"
+  },
+  "overig": {
+    "name": "overig",
+    "parent": "overig",
+    "parent_slug": "overig",
+    "description": null,
+    "icon_path": null
+  },
+  "dood-dier": {
+    "name": "Dood dier",
+    "parent": "Overlast Dier",
+    "parent_slug": "overlast-dier",
+    "description": "Meldingen die gaan over dode dieren zowel op land als in het water",
+    "icon_path": "/icons/overlast-dier/dood-dier.svg"
+  },
+  "eikenprocessierups": {
+    "name": "Eikenprocessierups",
+    "parent": "Overlast Dier",
+    "parent_slug": "overlast-dier",
+    "description": "Meldingen die specifiek gaan over overlast van eikenprocessierupsen.",
+    "icon_path": "/icons/overlast-dier/eikenprocessierups.svg"
+  },
+  "hond": {
+    "name": "Hond",
+    "parent": "Overlast Dier",
+    "parent_slug": "overlast-dier",
+    "description": "Meldingen die gaan over loslopende honden, hondenpoepoverlast.\r\nNIET: bijtende honden.",
+    "icon_path": "/icons/overlast-dier/hond.svg"
+  },
+  "kinderboerderij": {
+    "name": "Kinderboerderij",
+    "parent": "Overlast Dier",
+    "parent_slug": "overlast-dier",
+    "description": "",
+    "icon_path": "/icons/overlast-dier/kinderboerderij.svg"
+  },
+  "overig-overlast-dier": {
+    "name": "Overig Overlast Dier",
+    "parent": "Overlast Dier",
+    "parent_slug": "overlast-dier",
+    "description": "",
+    "icon_path": "/icons/overlast-dier/overig-overlast-dier.svg"
+  },
+  "plaagdier": {
+    "name": "Plaagdier",
+    "parent": "Overlast Dier",
+    "parent_slug": "overlast-dier",
+    "description": "Meldingen die gaan over ratten, muizen, wespen, roeken",
+    "icon_path": "/icons/overlast-dier/plaagdier.svg"
+  },
+  "bouw": {
+    "name": "Bouw",
+    "parent": "Overlast Openbare Ruimte",
+    "parent_slug": "overlast-openbare-ruimte",
+    "description": "Meldingen die gaan over overlast van bouwactiviteiten, alsmede verbouw activiteiten, vermoeden van illegale bouw, bouwmisstanden",
+    "icon_path": "/icons/overlast-openbare-ruimte/bouw.svg"
+  },
+  "fiets": {
+    "name": "Fiets",
+    "parent": "Overlast Openbare Ruimte",
+    "parent_slug": "overlast-openbare-ruimte",
+    "description": "Meldingen die gaan over fietsen die overlast veroorzaken, te lang ergens staan, vernield zijn of gedumpt.",
+    "icon_path": "/icons/overlast-openbare-ruimte/fiets.svg"
+  },
+  "geluid": {
+    "name": "Geluid",
+    "parent": "Overlast Openbare Ruimte",
+    "parent_slug": "overlast-openbare-ruimte",
+    "description": "Meldingen die gaan over geluidsoverlast van bouwactiviteiten, harde muziek van buren.",
+    "icon_path": "/icons/overlast-openbare-ruimte/geluid.svg"
+  },
+  "graffiti": {
+    "name": "Graffiti",
+    "parent": "Overlast Openbare Ruimte",
+    "parent_slug": "overlast-openbare-ruimte",
+    "description": "Meldingen die gaan over aangebrachte graffiti.",
+    "icon_path": "/icons/overlast-openbare-ruimte/graffiti.svg"
+  },
+  "horeca-en-evenement": {
+    "name": "Horeca en evenement",
+    "parent": "Overlast Openbare Ruimte",
+    "parent_slug": "overlast-openbare-ruimte",
+    "description": "Meldingen die gaan over geluidsoverlast van horeca en evenementen, (incl. TT circuit), kermissen, sluitingstijden horeca.",
+    "icon_path": "/icons/overlast-openbare-ruimte/horeca-en-evenement.svg"
+  },
+  "luchtkwaliteit": {
+    "name": "Luchtkwaliteit",
+    "parent": "Overlast Openbare Ruimte",
+    "parent_slug": "overlast-openbare-ruimte",
+    "description": "Meldingen die gaan over houtstookoverlast, houtkachels, bbq, afvalverbranding, rioolstank",
+    "icon_path": "/icons/overlast-openbare-ruimte/luchtkwaliteit.svg"
+  },
+  "overig-overlast-openbare-ruimte": {
+    "name": "Overig Overlast Openbare Ruimte",
+    "parent": "Overlast Openbare Ruimte",
+    "parent_slug": "overlast-openbare-ruimte",
+    "description": "",
+    "icon_path": "/icons/overlast-openbare-ruimte/overig-overlast-openbare-ruimte.svg"
+  },
+  "parkeren": {
+    "name": "Parkeren",
+    "parent": "Overlast Openbare Ruimte",
+    "parent_slug": "overlast-openbare-ruimte",
+    "description": "meldingen die gaan over overlast parkeren door fout geparkeerde auto's,",
+    "icon_path": "/icons/overlast-openbare-ruimte/parkeren.svg"
+  },
+  "persoon": {
+    "name": "Persoon",
+    "parent": "Overlast Openbare Ruimte",
+    "parent_slug": "overlast-openbare-ruimte",
+    "description": "Meldingen die gaan over overlast door personen zoals zwervers, junkies, daklozen, jongeren, hangjeugd",
+    "icon_path": "/icons/overlast-openbare-ruimte/persoon.svg"
+  },
+  "reclame": {
+    "name": "Reclame",
+    "parent": "Overlast Openbare Ruimte",
+    "parent_slug": "overlast-openbare-ruimte",
+    "description": "Meldingen die gaan over overlast door reclame uitingen, uitstallingen, reclameborden, reclamevlaggen, ongewenste reclame.",
+    "icon_path": "/icons/overlast-openbare-ruimte/reclame.svg"
+  },
+  "scooter": {
+    "name": "Scooter",
+    "parent": "Overlast Openbare Ruimte",
+    "parent_slug": "overlast-openbare-ruimte",
+    "description": "Meldingen die gaan over achtergelaten, uitgebrande, kapotte, gesloopte scooters",
+    "icon_path": "/icons/overlast-openbare-ruimte/scooter.svg"
+  },
+  "mankement-put": {
+    "name": "Mankement put",
+    "parent": "Riolering",
+    "parent_slug": "riolering",
+    "description": "Meldingen die gaan over ontbrekende, kapotte, verstopte rioolputten",
+    "icon_path": "/icons/riolering/mankement-put.svg"
+  },
+  "overig-riolering": {
+    "name": "Overig Riolering",
+    "parent": "Riolering",
+    "parent_slug": "riolering",
+    "description": "",
+    "icon_path": "/icons/riolering/overig-riolering.svg"
+  },
+  "riool": {
+    "name": "Riool",
+    "parent": "Riolering",
+    "parent_slug": "riolering",
+    "description": "Meldingen die gaan over defecten en problemen aan het riool, rioolaansluitingen",
+    "icon_path": "/icons/riolering/riool.svg"
+  },
+  "wateroverlast": {
+    "name": "Wateroverlast",
+    "parent": "Riolering",
+    "parent_slug": "riolering",
+    "description": "Meldingen die gaan over wateroverlast veroorzaakt omdat  hemelwater wat na zware of langdurige regen na een aantal uren nog  niet verdwenen is",
+    "icon_path": "/icons/riolering/wateroverlast.svg"
+  },
+  "bank": {
+    "name": "Bank",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "Meldingen die gaan over kapotte, beschadigde, vieze en nieuwe bankjes",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/bank.svg"
+  },
+  "bewegwijzering": {
+    "name": "Bewegwijzering",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "Meldingen die gaan over wegwijzers, straatnaamborden, fietsroutebordjes, plaatsnaamborden",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/bewegwijzering.svg"
+  },
+  "bushalte": {
+    "name": "Bushalte",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "Meldingen die gaan over kapotte, beschadigde, vieze bushokjes en ABRI's",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/bushalte.svg"
+  },
+  "gladheidsbestrijding": {
+    "name": "Gladheidsbestrijding",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "Meldingen die gaan over strooien, gladde wegen en fietspaden, opvriezende weggedeeltes.",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/gladheidsbestrijding.svg"
+  },
+  "kast": {
+    "name": "Kast",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "Meldingen die gaan over defecte electriciteitskasten, CAI, Ziggo kasten",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/kast.svg"
+  },
+  "onderhoud-straat-fietspad-en-stoep": {
+    "name": "Onderhoud straat, fietspad en stoep",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "Meldingen die gaan over kapotte en ontbrekende stoeptegels, slecht wegdek, gaten, verzakkingen, goten",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/onderhoud-straat-fietspad-en-stoep.svg"
+  },
+  "onveilige-verkeerssituatie": {
+    "name": "Onveilige verkeerssituatie",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "Meldingen die gaan over onveilige verkeersituaties door te hoge beplanting, slecht uitzicht op een kruising, obstakels die het uitzicht belemmeren",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/onveilige-verkeerssituatie.svg"
+  },
+  "overig-wegen-verkeer-en-straatmeubilair": {
+    "name": "Overig Wegen, verkeer en straatmeubilair",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/overig-wegen-verkeer-en-straatmeubilair.svg"
+  },
+  "paal": {
+    "name": "Paal",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "Meldingen die gaan over defecte, ontbrekende, smerige paaltjes",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/paal.svg"
+  },
+  "speelvoorziening": {
+    "name": "Speelvoorziening",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "Meldingen die gaan over onderhoud en defecten aan glijbanen, schommels, wipwap, speeltoestellen, trapveldjes",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/speelvoorziening.svg"
+  },
+  "straatverlichting": {
+    "name": "Straatverlichting",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/straatverlichting.svg"
+  },
+  "verkeersbord": {
+    "name": "Verkeersbord",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "Meldingen die gaan over ontbrekende, vernielde, slecht leesbare, onjuist geplaatste verkeersborden",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/verkeersbord.svg"
+  },
+  "verkeerslicht": {
+    "name": "Verkeerslicht",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "Meldingen die gaan over defecte, niet werkende of knipperende verkeerslicht installaties",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/verkeerslicht.svg"
+  },
+  "wegmarkering": {
+    "name": "Wegmarkering",
+    "parent": "Wegen, verkeer en straatmeubilair",
+    "parent_slug": "wegen-verkeer-en-straatmeubilair",
+    "description": "Meldingen die gaan over verdwenen, slecht zichtbare wegmarkeringen, haaientanden, stopstrepen, voorrangstekens op het wegdek",
+    "icon_path": "/icons/wegen-verkeer-en-straatmeubilair/wegmarkering.svg"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "assen-meldingen",
+  "version": "1.0.0",
+  "description": "Dagelijks overzicht van meldingen in de openbare ruimte van Assen — kaart, tabel en trends",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/copy-data.mjs && astro build",
+    "preview": "astro preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GraafG/assen-meldingen.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/GraafG/assen-meldingen/issues"
+  },
+  "homepage": "https://github.com/GraafG/assen-meldingen#readme",
+  "dependencies": {
+    "astro": "^6.3.3"
+  }
+}

@@ -1,0 +1,60 @@
+name: Scrape Meldingen Assen
+
+on:
+  schedule:
+    - cron: '30 7 * * *'  # 07:30 UTC = 09:30 CET
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Run scraper
+        run: python scraper.py
+      - name: Build history
+        run: python build_history.py
+      - name: Commit data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ categories.json public/icons/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git pull --rebase origin main
+            git commit -m "Update meldingen $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+  deploy:
+    needs: scrape
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - uses: actions/deploy-pages@v4
