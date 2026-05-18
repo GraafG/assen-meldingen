@@ -31,11 +31,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
           git add data/ categories.json areas.json public/icons/
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git pull --rebase origin main
             git commit -m "Update meldingen $(date -u +%Y-%m-%d)"
             git push
           fi
