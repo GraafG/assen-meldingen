@@ -140,6 +140,36 @@ def build_history():
     out.write_text(json.dumps(history, ensure_ascii=False), encoding="utf-8")
     print(f"Built history: {len(all_meldingen)} open, {len(resolved_list)} resolved → {out}")
 
+    # Export all unique meldingen to a single file for the "all time" view
+    export_all_unique_meldingen(all_meldingen)
+
+
+def export_all_unique_meldingen(all_meldingen=None):
+    """Export all unique meldingen across all snapshots to data/all_meldingen.json."""
+    if all_meldingen is None:
+        manifest = DATA_DIR / "index.json"
+        if not manifest.exists():
+            print("No data/index.json — nothing to export.")
+            return
+        dates = sorted(json.loads(manifest.read_text(encoding="utf-8")))
+        all_meldingen = {}
+        for date_str in dates:
+            path = snapshot_path(date_str)
+            if not path.exists():
+                continue
+            for m in json.loads(path.read_text(encoding="utf-8")):
+                if m["id"] not in all_meldingen:
+                    all_meldingen[m["id"]] = m
+
+    meldingen_list = sorted(
+        all_meldingen.values(),
+        key=lambda m: m["created_at"],
+        reverse=True,
+    )
+    out = DATA_DIR / "all_meldingen.json"
+    out.write_text(json.dumps(meldingen_list, ensure_ascii=False), encoding="utf-8")
+    print(f"Exported {len(meldingen_list)} unique meldingen → {out}")
+
 
 if __name__ == "__main__":
     build_history()

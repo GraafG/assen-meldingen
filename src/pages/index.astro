@@ -116,17 +116,21 @@ async function init() {
     if (catRes && catRes.ok) categoriesData = await catRes.json();
 
     const picker = document.getElementById('date-picker');
+    const allOpt = document.createElement('option');
+    allOpt.value = '__all__'; allOpt.textContent = 'Alle (historisch)';
+    picker.appendChild(allOpt);
     dates.forEach((d, i) => {
       const opt = document.createElement('option');
       opt.value = d; opt.textContent = d;
-      if (i === 0) opt.selected = true;
       picker.appendChild(opt);
     });
     picker.addEventListener('change', () => loadDate(picker.value));
 
     initMap();
-    if (dates.length) loadDate(dates[0]);
-    else document.getElementById('loading').textContent = 'Geen data beschikbaar.';
+    if (dates.length) {
+      picker.value = dates[0];
+      loadDate(dates[0]);
+    } else document.getElementById('loading').textContent = 'Geen data beschikbaar.';
 
     renderResolved();
   } catch (e) {
@@ -160,7 +164,10 @@ function initMap() {
 async function loadDate(dateStr) {
   document.getElementById('loading').style.display = 'block';
   try {
-    const res = await fetch(dataPathForDate(dateStr));
+    const url = dateStr === '__all__'
+      ? `${DATA_BASE}/data/all_meldingen.json`
+      : dataPathForDate(dateStr);
+    const res = await fetch(url);
     allMeldingen = await res.json();
     document.getElementById('loading').style.display = 'none';
     renderCatToggles();
