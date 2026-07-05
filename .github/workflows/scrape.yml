@@ -13,10 +13,25 @@ permissions:
   pages: write
   id-token: write
 
+# Allow only one Pages deployment at a time and let in-progress production
+# deployments finish rather than cancelling them.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  scrape:
+  # Single job: scrape the data, build the site, deploy to Pages, and only THEN
+  # commit & push the scraped data. Deploying before the push keeps github.sha
+  # equal to the tip of main that the Pages deployment is anchored to. Pushing a
+  # new commit first (the previous two-job setup) left the deployment pointing at
+  # a superseded commit, which GitHub rejected with "Deployment failed, try again
+  # later."
+  scrape-and-deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
@@ -27,7 +42,25 @@ jobs:
         run: python scraper.py
       - name: Build history
         run: python build_history.py
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+      # Runs even if the deploy fails so a scraped snapshot is never lost.
       - name: Commit data
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -38,22 +71,3 @@ jobs:
             git commit -m "Update meldingen $(date -u +%Y-%m-%d)"
             git push
           fi
-
-  deploy:
-    needs: scrape
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          ref: main
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v5
-        with:
-          path: dist
-      - uses: actions/deploy-pages@v5
